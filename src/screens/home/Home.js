@@ -1,14 +1,20 @@
-import React, { Component } from "react";
-import Header from "../../common/header/Header";
+import React, { useState } from "react";
+//import Header from "../../common/header/Login";
 import { TabPanel, a11yProps } from "../../common/tabPanel/TabPanel";
-import { Box, Tab, Tabs } from "@material-ui/core";
+import { Box, Tab, Tabs, Typography } from "@material-ui/core";
 import Register from "../register/Register";
 import ContactUs from "../contactus/ContactUs";
 import Search from "../search/Search";
-import Login from "../login/Login";
+//import Login from "../login/Login";
 import AdminReport from "../adminReport/AdminReport";
 import Dashboard from "../dashboard/Dashboard";
-
+import { CommonHeader } from "../../common/header/CommonHeader";
+import Login from "../../common/header/Login";
+import "./Home.css";
+import { FrontPage } from "./FrontPage";
+import { Menu, TextField, MenuItem } from "@mui/material";
+import SearchByBloodBank from "../search/SearchByBloodBank";
+import SearchByBloodGroup from "../search/SearchByBloodGroup";
 /**
  * This component displays the Header component on top with DoctorList and Appointment Components in tabs
  * @param baseUrl
@@ -32,9 +38,21 @@ const Home = ({
     setValue(newValue);
   };
 
+  // const [anchorEl, setAnchorEl] = useState(null);
+  // const openMenu = Boolean(anchorEl);
+  // const handleClick = (e) => {
+  //   setAnchorEl(e.current.target);
+  //   console.log(e.current.target);
+  // };
+
+  // const handleCLose = () => {
+  //   setAnchorEl(null);
+  // };
+
   return (
     <React.Fragment>
-      <Header
+      <CommonHeader />
+      <Login
         baseUrl={baseUrl}
         accessToken={accessToken}
         setAccessToken={setAccessToken}
@@ -60,7 +78,7 @@ const Home = ({
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <Home
+          <FrontPage
             baseUrl={baseUrl}
             accessToken={accessToken}
             loggedInUserId={loggedInUserId}
@@ -72,6 +90,7 @@ const Home = ({
             accessToken={accessToken}
             loggedInUserId={loggedInUserId}
           />
+          {/* Dashboard */}
         </TabPanel>
         <TabPanel value={value} index={2}>
           <Register
@@ -79,28 +98,58 @@ const Home = ({
             accessToken={accessToken}
             loggedInUserId={loggedInUserId}
           />
+          {/* Register */}
         </TabPanel>
-        <TabPanel value={value} index={3}>
+        <TabPanel
+          value={value}
+          index={3}
+          // aria-controls="search-menu"
+          // aria-haspopup="true"
+          // aria-expanded={openMenu ? "true" : undefined}
+          // onClick={handleClick}
+        >
           <Search
             baseUrl={baseUrl}
             accessToken={accessToken}
             loggedInUserId={loggedInUserId}
           />
+          {/* Search */}
+          {/* Drop-down items */}
+          {/* <Menu
+            id="search-menu"
+            anchorEl={anchorEl}
+            open={openMenu}
+            onClose={handleCLose}
+          >
+            <MenuItem onClick={handleCLose}>By Blood Bank</MenuItem>
+            <MenuItem onClick={handleCLose}>By Blood Group</MenuItem>
+          </Menu> */}
+          {/* Search */}
         </TabPanel>
-        <TabPanel value={value} index={4}>
+        <TabPanel value={value} index={5}>
           <AdminReport
             baseUrl={baseUrl}
             accessToken={accessToken}
             loggedInUserId={loggedInUserId}
           />
+          {/* Contact US */}
         </TabPanel>
+
         <TabPanel value={value} index={5}>
           <ContactUs
             baseUrl={baseUrl}
             accessToken={accessToken}
             loggedInUserId={loggedInUserId}
           />
+          {/* Contact US */}
         </TabPanel>
+
+        <footer>
+          <div>
+            Copyright © 2022,Designed & Developed by CDAC Chennai Govt. of
+            India. All Rights Reserved.
+          </div>
+        </footer>
       </div>
     </React.Fragment>
   );

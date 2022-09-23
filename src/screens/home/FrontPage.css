@@ -1,0 +1,53 @@
+/* Adding color to first section */
+
+#one {
+    background-color: #f7ebcc;
+}
+
+
+/* Adding color to second section */
+
+#two {
+    background-color: #ffffff;
+}
+
+
+/* Adding color to third section */
+
+#three {
+    background-color: #f7ebcc;
+}
+
+
+/* General styling to our main section */
+
+.content {
+    width: 33vw;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+
+/* Styling to each individual section */
+
+.section {
+    width: 100%;
+    height: 100%;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* color: #ffffff; */
+    color: red;
+    font-style: oblique;
+    border: 8px solid #b22222;
+}
+
+
+/* For hiding scroll bar */
+
+::-webkit-scrollbar {
+    display: none;
+}

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import "./Header.css";
+import "./Login.css";
 import "../common.css";
 import { Button, Tabs, Tab, Box } from "@material-ui/core";
 import { TabPanel, a11yProps } from "../tabPanel/TabPanel";
-import Login from "../../screens/login/Login";
-import Register from "../../screens/register/Register";
+//import Login from "../../screens/login/Login";
+//import Register from "../../screens/register/Register";
+import SignIn from "../../screens/login/SignIn";
+import SignUp from "../../screens/login/SignUp";
 
 //=================================CSS Styles ================================================//
 
@@ -17,7 +19,7 @@ const loginModalCustomStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    padding: "0px",
+    padding: "50px",
   },
 };
 
@@ -113,17 +115,15 @@ const Header = ({
 
   return (
     <div className="header-panel">
-      <div className="logo-panel">
-        {/* <img src={logo} alt="logo" className="logo-img" /> */}
-      </div>
-      <div className="title-panel">
-        <h2>Doctor Finder </h2>
-      </div>
-      <div className="btn-panel">
+      <div className="btn-panel" style={{ display: "flex" }}>
         {accessToken === "" ? (
-          <Button variant="contained" color="primary" onClick={handleOpenModal}>
-            {" "}
-            Login{" "}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleOpenModal}
+            style={{ marginLeft: "auto" }}
+          >
+            Login
           </Button>
         ) : (
           <Button variant="contained" color="secondary" onClick={handleLogout}>
@@ -139,7 +139,7 @@ const Header = ({
         contentLabel="Login Modal"
       >
         <div className="heading">
-          <h2>Authentication</h2>
+          <h2>Login</h2>
         </div>
         <div className="tabs-container">
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -148,12 +148,13 @@ const Header = ({
               onChange={handleChange}
               aria-label="basic tabs example"
             >
-              <Tab label="Login" {...a11yProps(0)} />
-              <Tab label="Register" {...a11yProps(1)} />
+              <Tab label="SignIn" {...a11yProps(0)} />
+              <Tab label="SignUp" {...a11yProps(1)} />
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
-            <Login
+            <SignIn
+              baseUrl={baseUrl}
               validateEmail={validateEmail}
               showEmptyError={showEmptyError}
               hideEmptyError={hideEmptyError}
@@ -164,7 +165,7 @@ const Header = ({
             />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Register
+            <SignUp
               baseUrl={baseUrl}
               validateEmail={validateEmail}
               showEmptyError={showEmptyError}

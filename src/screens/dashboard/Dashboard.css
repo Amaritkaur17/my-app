@@ -1,0 +1,24 @@
+.panel-heading {
+    padding: 10px 15px;
+    border: 5px solid #f33232;
+    background-color: #ecb6b6;
+    text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.piechart {
+    background-image: url("blood-pie.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 0px;
+    /* margin-left: 15px; */
+    width: 650px;
+    height: 450px;
+    float: left;
+    display: block;
+    margin-left: 25%;
+    margin-right: 25%;
+}

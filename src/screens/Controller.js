@@ -29,75 +29,76 @@ const Controller = () => {
               />
             }
           />
+
+          <Route
+            exact
+            path="/all"
+            element={
+              <Dashboard
+                baseUrl={baseUrl}
+                accessToken={accessToken}
+                setAccessToken={setAccessToken}
+                loggedInUserId={loggedInUserId}
+                setLoggedInUserId={setLoggedInUserId}
+              />
+            }
+          />
+          <Route
+            exact
+            path="/"
+            element={
+              <AdminReport
+                baseUrl={baseUrl}
+                accessToken={accessToken}
+                setAccessToken={setAccessToken}
+                loggedInUserId={loggedInUserId}
+                setLoggedInUserId={setLoggedInUserId}
+              />
+            }
+          />
+
+          <Route
+            exact
+            path="/r"
+            element={
+              <Register
+                baseUrl={baseUrl}
+                accessToken={accessToken}
+                setAccessToken={setAccessToken}
+                loggedInUserId={loggedInUserId}
+                setLoggedInUserId={setLoggedInUserId}
+              />
+            }
+          />
+
+          <Route
+            exact
+            path="/location/{location}"
+            element={
+              <Search
+                baseUrl={baseUrl}
+                accessToken={accessToken}
+                setAccessToken={setAccessToken}
+                loggedInUserId={loggedInUserId}
+                setLoggedInUserId={setLoggedInUserId}
+              />
+            }
+          />
+
+          <Route
+            exact
+            path="/r"
+            element={
+              <ContactUs
+                baseUrl={baseUrl}
+                accessToken={accessToken}
+                setAccessToken={setAccessToken}
+                loggedInUserId={loggedInUserId}
+                setLoggedInUserId={setLoggedInUserId}
+              />
+            }
+          />
         </Routes>
-        <Route
-          exact
-          path="/all"
-          element={
-            <Dashboard
-              baseUrl={baseUrl}
-              accessToken={accessToken}
-              setAccessToken={setAccessToken}
-              loggedInUserId={loggedInUserId}
-              setLoggedInUserId={setLoggedInUserId}
-            />
-          }
-        />
-        <Route
-          exact
-          path="/"
-          element={
-            <AdminReport
-              baseUrl={baseUrl}
-              accessToken={accessToken}
-              setAccessToken={setAccessToken}
-              loggedInUserId={loggedInUserId}
-              setLoggedInUserId={setLoggedInUserId}
-            />
-          }
-        />
-
-        <Route
-          exact
-          path="/r"
-          element={
-            <Register
-              baseUrl={baseUrl}
-              accessToken={accessToken}
-              setAccessToken={setAccessToken}
-              loggedInUserId={loggedInUserId}
-              setLoggedInUserId={setLoggedInUserId}
-            />
-          }
-        />
-
-        <Route
-          exact
-          path="/location/{location}"
-          element={
-            <Search
-              baseUrl={baseUrl}
-              accessToken={accessToken}
-              setAccessToken={setAccessToken}
-              loggedInUserId={loggedInUserId}
-              setLoggedInUserId={setLoggedInUserId}
-            />
-          }
-        />
-
-        <Route
-          exact
-          path="/r"
-          element={
-            <ContactUs
-              baseUrl={baseUrl}
-              accessToken={accessToken}
-              setAccessToken={setAccessToken}
-              loggedInUserId={loggedInUserId}
-              setLoggedInUserId={setLoggedInUserId}
-            />
-          }
-        />
       </div>
     </Router>
   );

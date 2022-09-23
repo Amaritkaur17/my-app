@@ -12,6 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Box, TextField, MenuItem } from "@mui/material";
 import { BloodGroupSelect } from "./BloodGroupSelect";
 //import "react-dropdown/style.css";
+import "./Register.css";
 
 //=================================CSS Styles ================================================//
 const useRegisterStyles = makeStyles((theme) => ({
@@ -290,7 +291,7 @@ const Register = ({
         </FormHelperText>
       </FormControl>
       <FormControl>
-        <InputLabel htmlFor="first-name">Blood Group *</InputLabel>
+        {/* <InputLabel htmlFor="first-name">Blood Group *</InputLabel> */}
         <BloodGroupSelect />
       </FormControl>
       <Button

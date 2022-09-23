@@ -17,7 +17,7 @@ export const BloodGroupSelect = () => {
         fullwidth
         size="small"
         color="secondary"
-        helperText="Please select your Blood Group"
+        // helperText="Please select your Blood Group"
       >
         <MenuItem value="a+">A_POSITIVE</MenuItem>
         <MenuItem value="b+">B_POSITIVE</MenuItem>
