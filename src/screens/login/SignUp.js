@@ -31,12 +31,13 @@ const useSignUpStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = ({
+  baseUrl,
   validateUsername,
   validUsername,
   validateEmail,
   showEmptyError,
   hideEmptyError,
-  fetchSignUp,
+  // fetchSignUp,
   closeModal,
   setAccessToken,
   setLoggedInUserId,
@@ -132,7 +133,29 @@ const SignUp = ({
       }
     }
   };
+  // ------------------------------------fetch--------------------------------------------------
 
+  const fetchSignUp = async (registerForm) => {
+    const body = {
+      firstName: registerForm.firstName,
+      lastName: registerForm.lastName,
+      dob: "1903-08-06",
+      mobile: registerForm.mobile,
+      password: registerForm.regPassword,
+      emailId: registerForm.regEmail,
+    };
+
+    const rawResponseReg = await fetch(baseUrl + "users/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    const responseReg = await rawResponseReg.json();
+    return { rawResponseReg, responseReg };
+  };
+  //---------------------------------------------------------------------------------------------------
   const SignUpInputChangedHandler = (e) => {
     hideEmptyError(SignUpForm);
     hideErrors();

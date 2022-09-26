@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import Home from "../screens/home/Home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "./dashboard/Dashboard";
-import Register from "./register/Register";
-import Search from "./search/Search";
 import ContactUs from "./contactus/ContactUs";
 import AdminReport from "./adminReport/AdminReport";
+import ShowDetails from "./search/ShowDetails";
+import SearchByBloodBank from "./search/SearchByBloodBank";
+import RegisterBloodBank from "./register/RegisterBloodBank";
 
 const Controller = () => {
   const baseUrl = "http://localhost:8080/";
@@ -61,7 +62,7 @@ const Controller = () => {
             exact
             path="/r"
             element={
-              <Register
+              <RegisterBloodBank
                 baseUrl={baseUrl}
                 accessToken={accessToken}
                 setAccessToken={setAccessToken}
@@ -75,12 +76,11 @@ const Controller = () => {
             exact
             path="/location/{location}"
             element={
-              <Search
+              <SearchByBloodBank
                 baseUrl={baseUrl}
                 accessToken={accessToken}
-                setAccessToken={setAccessToken}
                 loggedInUserId={loggedInUserId}
-                setLoggedInUserId={setLoggedInUserId}
+                setAccessToken={setAccessToken}
               />
             }
           />
@@ -90,6 +90,21 @@ const Controller = () => {
             path="/r"
             element={
               <ContactUs
+                baseUrl={baseUrl}
+                accessToken={accessToken}
+                setAccessToken={setAccessToken}
+                loggedInUserId={loggedInUserId}
+                setLoggedInUserId={setLoggedInUserId}
+              />
+            }
+          />
+          {/* </Routes> */}
+
+          <Route
+            exact
+            path="/ShowDetails.js"
+            element={
+              <ShowDetails
                 baseUrl={baseUrl}
                 accessToken={accessToken}
                 setAccessToken={setAccessToken}

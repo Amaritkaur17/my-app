@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   FormControl,
@@ -33,33 +33,38 @@ const Register = ({
   validateEmail,
   showEmptyError,
   hideEmptyError,
-  fetchLogin,
+  // fetchLogin,
   closeModal,
   setAccessToken,
   setLoggedInUserId,
 }) => {
   const registerClasses = useRegisterStyles();
   const [registerForm, setRegisterForm] = useState({
-    firstName: "",
-    lastName: "",
+    userName: "",
     regEmail: "",
     regPassword: "",
     mobile: "",
+    bloodgroup: "",
   });
   const [registerError, setRegisterError] = useState({
-    firstNameError: false,
-    lastNameError: false,
+    userNameError: false,
     regEmailError: false,
     regPasswordError: false,
     mobileError: false,
   });
   const [registerErrorText, setRegisterErrorText] = useState({
-    firstNameErrorText: "",
-    lastNameErrorText: "",
+    userNameErrorText: "",
     regEmailErrorText: "",
     regPasswordErrorText: "",
     mobileErrorText: "",
   });
+
+  const [bloodgroup, setBloodGroup] = useState("");
+
+  // useEffect(() => {
+  //   // setRegisterForm((state) => ({ ...state, bloodgroup: bloodgroup }));
+  //   // console.log(registerForm, bloodgroup);
+  // }, [bloodgroup]);
 
   //================================== Validation methods =====================================//
   /* checks that the number should be 10 digits */
@@ -73,7 +78,7 @@ const Register = ({
   };
 
   function validateRegister(registerForm) {
-    let errorFound = showEmptyError(registerForm);
+    //  let errorFound = showEmptyError(registerForm);
     let isValidEmail = validateEmail(registerForm["regEmail"]);
     if (!isValidEmail) {
       const error = registerError;
@@ -92,7 +97,8 @@ const Register = ({
       setRegisterError({ ...error });
       setRegisterErrorText({ ...errorText });
     }
-    return isValidEmail && !errorFound;
+    return isValidEmail;
+    //&& !errorFound;
   }
 
   //===========================blood group drop down=======================//
@@ -117,15 +123,15 @@ const Register = ({
   //================================== API calls ====================================//
   const fetchRegister = async (registerForm) => {
     const body = {
-      firstName: registerForm.firstName,
-      lastName: registerForm.lastName,
-      dob: "1903-08-06",
+      username: registerForm.userName,
+      // dob: "1903-08-06",
       mobile: registerForm.mobile,
       password: registerForm.regPassword,
-      emailId: registerForm.regEmail,
+      email: registerForm.regEmail,
+      bloodGroup: registerForm.bloodgroup,
     };
 
-    const rawResponseReg = await fetch(baseUrl + "users/register", {
+    const rawResponseReg = await fetch(baseUrl + "api/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -136,6 +142,10 @@ const Register = ({
     return { rawResponseReg, responseReg };
   };
 
+  //   header := w.Header()
+  // header.Add("Access-Control-Allow-Origin", "*")
+  // header.Add("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+  // header.Add("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With")
   //==================================== Event Handlers ==========================//
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -147,28 +157,28 @@ const Register = ({
         const msg = document.getElementById("reg-alert");
         msg.classList.remove("hide-message");
         msg.classList.add("show-message");
-        const { rawResponse, response } = await fetchLogin(
-          registerForm.regEmail,
-          registerForm.regPassword
-        );
-        if (rawResponse.ok) {
-          setAccessToken(response.accessToken);
-          setLoggedInUserId(registerForm.regEmail);
-          closeModal();
-        } else {
-          const error = registerError;
-          error["emailError"] = true;
-          const errorText = registerErrorText;
-          errorText["emailErrorText"] = response.message;
-          setRegisterError({ ...error });
-          setRegisterErrorText({ ...errorText });
-        }
+        // const { rawResponse, response } = await fetchLogin(
+        //   registerForm.regEmail,
+        //   registerForm.regPassword
+        // );
+        // if (rawResponse.ok) {
+        //   setAccessToken(response.accessToken);
+        //   setLoggedInUserId(registerForm.regEmail);
+        //   closeModal();
+        // } else {
+        //   const error = registerError;
+        //   error["emailError"] = true;
+        //   const errorText = registerErrorText;
+        //   errorText["emailErrorText"] = response.message;
+        //   setRegisterError({ ...error });
+        //   setRegisterErrorText({ ...errorText });
+        // }
         setRegisterForm({
-          firstName: "",
-          lastName: "",
+          userName: "",
           regEmail: "",
           regPassword: "",
           mobile: "",
+          bloodgroup: "",
         });
       } else {
         const error = registerError;
@@ -183,15 +193,13 @@ const Register = ({
 
   function hideErrors() {
     setRegisterError({
-      firstNameError: false,
-      lastNameError: false,
+      userNameError: false,
       regEmailError: false,
       regPasswordError: false,
       mobileError: false,
     });
     setRegisterErrorText({
-      firstNameErrorText: "",
-      lastNameErrorText: "",
+      userNameErrorText: "",
       regEmailErrorText: "",
       regPasswordErrorText: "",
       mobileErrorText: "",
@@ -199,17 +207,17 @@ const Register = ({
   }
 
   const registerInputChangedHandler = (e) => {
-    hideEmptyError(registerForm);
+    //   hideEmptyError(registerForm);
     hideErrors();
     const state = registerForm;
     state[e.target.name] = e.target.value;
-
+    console.log("Changing values for registerForm", registerForm);
     setRegisterForm({ ...state });
   };
 
   return (
     <form className={registerClasses.root}>
-      <FormControl>
+      {/* <FormControl>
         <InputLabel htmlFor="first-name">First Name *</InputLabel>
         <Input
           id="first-name"
@@ -238,6 +246,22 @@ const Register = ({
           {registerErrorText.lastNameErrorText}
         </FormHelperText>
         <FormHelperText id="lastName-empty-error" className="floating-error">
+          Please fill out this field
+        </FormHelperText>
+      </FormControl> */}
+      <FormControl>
+        <InputLabel htmlFor="user-name">User Name *</InputLabel>
+        <Input
+          id="user-name"
+          name="userName"
+          aria-describedby="userName"
+          onChange={registerInputChangedHandler}
+          error={registerError.userNameError === true}
+        />
+        <FormHelperText id="userName-error-text">
+          {registerErrorText.userNameErrorText}
+        </FormHelperText>
+        <FormHelperText id="userName-empty-error" className="floating-error">
           Please fill out this field
         </FormHelperText>
       </FormControl>
@@ -291,8 +315,18 @@ const Register = ({
         </FormHelperText>
       </FormControl>
       <FormControl>
-        {/* <InputLabel htmlFor="first-name">Blood Group *</InputLabel> */}
-        <BloodGroupSelect />
+        <InputLabel htmlFor="first-name">Blood Group *</InputLabel>
+        <br />
+        <br />
+        <BloodGroupSelect
+          bloodgroup={bloodgroup}
+          setBloodGroup={setBloodGroup}
+          form={registerForm}
+          setForm={setRegisterForm}
+        />
+        <FormHelperText id="mobile-empty-error" className="floating-error">
+          Please fill out this field
+        </FormHelperText>
       </FormControl>
       <Button
         id="register-btn"

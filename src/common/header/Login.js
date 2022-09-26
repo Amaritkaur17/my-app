@@ -7,7 +7,8 @@ import { TabPanel, a11yProps } from "../tabPanel/TabPanel";
 //import Login from "../../screens/login/Login";
 //import Register from "../../screens/register/Register";
 import SignIn from "../../screens/login/SignIn";
-import SignUp from "../../screens/login/SignUp";
+//import SignUp from "../../screens/login/SignUp";
+import Register from "../../screens/register/Register";
 
 //=================================CSS Styles ================================================//
 
@@ -83,7 +84,7 @@ const Header = ({
   };
 
   const handleLogout = async () => {
-    const rawResponse = await fetch(baseUrl + "auth/logout", {
+    const rawResponse = await fetch(baseUrl + "api/auth/signout", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -165,7 +166,7 @@ const Header = ({
             />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <SignUp
+            <Register
               baseUrl={baseUrl}
               validateEmail={validateEmail}
               showEmptyError={showEmptyError}

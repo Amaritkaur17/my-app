@@ -1,0 +1,33 @@
+a {
+    text-decoration: none;
+}
+
+.heading {
+    background-color: purple;
+    height: 70px;
+    padding: 0px 11px 0px 11px;
+}
+
+.heading h2 {
+    display: inline-block;
+    color: white;
+    font-weight: normal;
+}
+
+.hide-message {
+    display: none !important;
+}
+
+.show-message {
+    display: flex !important;
+}
+
+.star-icon {
+    color: #acacac;
+    font-size: 2em !important;
+}
+
+.star-selected {
+    color: #ffc100;
+    font-size: 2em !important;
+}

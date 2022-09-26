@@ -31,12 +31,9 @@ const useSignInStyles = makeStyles((theme) => ({
 }));
 
 const SignIn = ({
-  validateUsername,
-  validUsername,
-  validateEmail,
   showEmptyError,
+  baseUrl,
   hideEmptyError,
-  fetchSignIn,
   closeModal,
   setAccessToken,
   setLoggedInUserId,
@@ -76,25 +73,50 @@ const SignIn = ({
     let errorFound = showEmptyError(SignInForm);
 
     const username = SignInForm["username"];
-    let isValidUsername = validateUsername(username);
-    if (!isValidUsername) {
-      const error = SignInError;
-      error["usernameError"] = true;
-      const errorText = SignInErrorText;
-      errorText["SignInErrorText"] = "No username found";
-      setSignInError({ ...error });
-      setSignInErrorText({ ...errorText });
-    }
+    // let isValidUsername = validateUsername(username);
+    // if (!isValidUsername) {
+    //   const error = SignInError;
+    //   error["usernameError"] = true;
+    //   const errorText = SignInErrorText;
+    //   errorText["SignInErrorText"] = "No username found";
+    //   setSignInError({ ...error });
+    //   setSignInErrorText({ ...errorText });
+    // }
 
-    return !errorFound && isValidUsername;
+    return !errorFound;
+    // && isValidUsername;
   }
+
+  //-----------------------------fetch------------------------------------------------------------
+  const fetchSignIn = async (username, password) => {
+    const body = {
+      username: `${username}`,
+      password: `${password}`,
+    };
+
+    const rawResponse = await fetch(baseUrl + "api/auth/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    const response = await rawResponse.json();
+    if (rawResponse.ok) {
+      setAccessToken(response.token);
+      console.log(response.token);
+    } else {
+      alert("Sign In Failed");
+    }
+    return { rawResponse, response };
+  };
 
   //================================ Event Handlers =======================================//
   const handleSignIn = async (e) => {
     e.preventDefault();
     const { username, password } = SignInForm;
-    let isValid = validateSignIn(SignInForm);
-
+    //let isValid = validateSignIn(SignInForm);
+    let isValid = true;
     if (isValid === true) {
       const { rawResponse, response } = await fetchSignIn(username, password);
       if (rawResponse.ok) {

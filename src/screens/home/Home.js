@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //import Header from "../../common/header/Login";
 import { TabPanel, a11yProps } from "../../common/tabPanel/TabPanel";
 import { Box, Tab, Tabs, Typography } from "@material-ui/core";
-import Register from "../register/Register";
+// import Register from "../register/Register";
 import ContactUs from "../contactus/ContactUs";
-import Search from "../search/Search";
 //import Login from "../login/Login";
 import AdminReport from "../adminReport/AdminReport";
 import Dashboard from "../dashboard/Dashboard";
@@ -14,7 +13,8 @@ import "./Home.css";
 import { FrontPage } from "./FrontPage";
 import { Menu, TextField, MenuItem } from "@mui/material";
 import SearchByBloodBank from "../search/SearchByBloodBank";
-import SearchByBloodGroup from "../search/SearchByBloodGroup";
+import RegisterBloodBank from "../register/RegisterBloodBank";
+//import SearchByBloodGroup from "../search/SearchByBloodGroup";
 /**
  * This component displays the Header component on top with DoctorList and Appointment Components in tabs
  * @param baseUrl
@@ -37,7 +37,10 @@ const Home = ({
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  // useEffect(() => {
+  //   console.log("Access token in home" + accessToken);
+  //   //setAccessToken(accessToken);
+  // }, [accessToken]);
   // const [anchorEl, setAnchorEl] = useState(null);
   // const openMenu = Boolean(anchorEl);
   // const handleClick = (e) => {
@@ -93,7 +96,7 @@ const Home = ({
           {/* Dashboard */}
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <Register
+          <RegisterBloodBank
             baseUrl={baseUrl}
             accessToken={accessToken}
             loggedInUserId={loggedInUserId}
@@ -108,10 +111,11 @@ const Home = ({
           // aria-expanded={openMenu ? "true" : undefined}
           // onClick={handleClick}
         >
-          <Search
+          <SearchByBloodBank
             baseUrl={baseUrl}
             accessToken={accessToken}
             loggedInUserId={loggedInUserId}
+            setAccessToken={setAccessToken}
           />
           {/* Search */}
           {/* Drop-down items */}
