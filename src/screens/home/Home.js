@@ -52,6 +52,16 @@ const Home = ({
   //   setAnchorEl(null);
   // };
 
+  const validateEmail = (email) => {
+    let validEmailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (!email.match(validEmailRegex)) {
+      return false;
+    }
+
+    return true;
+  };
+
   return (
     <React.Fragment>
       <CommonHeader />
@@ -61,6 +71,7 @@ const Home = ({
         setAccessToken={setAccessToken}
         loggedInUserId={loggedInUserId}
         setLoggedInUserId={setLoggedInUserId}
+        validateEmail={validateEmail}
       />
       <div className="home-container">
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -100,6 +111,7 @@ const Home = ({
             baseUrl={baseUrl}
             accessToken={accessToken}
             loggedInUserId={loggedInUserId}
+            validateEmail={validateEmail}
           />
           {/* Register */}
         </TabPanel>
@@ -130,11 +142,13 @@ const Home = ({
           </Menu> */}
           {/* Search */}
         </TabPanel>
-        <TabPanel value={value} index={5}>
+        <TabPanel value={value} index={4}>
           <AdminReport
             baseUrl={baseUrl}
             accessToken={accessToken}
+            setAccessToken={setAccessToken}
             loggedInUserId={loggedInUserId}
+            setLoggedInUserId={setLoggedInUserId}
           />
           {/* Contact US */}
         </TabPanel>

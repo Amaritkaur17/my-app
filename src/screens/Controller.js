@@ -46,7 +46,7 @@ const Controller = () => {
           />
           <Route
             exact
-            path="/"
+            path=""
             element={
               <AdminReport
                 baseUrl={baseUrl}

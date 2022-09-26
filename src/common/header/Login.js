@@ -9,6 +9,7 @@ import { TabPanel, a11yProps } from "../tabPanel/TabPanel";
 import SignIn from "../../screens/login/SignIn";
 //import SignUp from "../../screens/login/SignUp";
 import Register from "../../screens/register/Register";
+import RegisterBloodBank from "../../screens/register/RegisterBloodBank";
 
 //=================================CSS Styles ================================================//
 
@@ -40,6 +41,7 @@ const Header = ({
   setAccessToken,
   loggedInUserId,
   setLoggedInUserId,
+  validateEmail,
 }) => {
   const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
 
@@ -59,16 +61,6 @@ const Header = ({
 
     return errorFound;
   }
-
-  const validateEmail = (email) => {
-    let validEmailRegex =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if (!email.match(validEmailRegex)) {
-      return false;
-    }
-
-    return true;
-  };
 
   const fetchLogin = async (email, password) => {
     let stringToEncode = email + ":" + password;

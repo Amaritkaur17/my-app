@@ -116,7 +116,7 @@ const SearchByBloodBank = ({
   // =================================================================================================================
   // render() {
   return (
-    <div className="App">
+    <div className="Search-By-BloodBank">
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-simple-select-label"> Location </InputLabel>{" "}
         <Select
@@ -173,22 +173,7 @@ const SearchByBloodBank = ({
         </Button>{" "}
       </div>
       <div style={{ height: 700, width: "70%" }}>
-        <DataGrid
-          rows={tableData}
-          columns={columns}
-          pageSize={10}
-          //    checkboxSelection
-          // onSelectionModelChange={({ selectionModel }) => {
-          //   const rowIds = selectionModel.map((rowId) =>
-          //     parseInt(String(rowId), 10)
-          //   );
-          //   // const rowsToDelete = DataTable.filter((row) =>
-          //   //   rowIds.includes(row.id)
-          //   // );
-          //   // setDeletedRows(rowsToDelete);
-          //   // console.log(deletedRows);
-          // }}
-        />{" "}
+        <DataGrid rows={tableData} columns={columns} pageSize={10} />{" "}
       </div>{" "}
     </div>
   );

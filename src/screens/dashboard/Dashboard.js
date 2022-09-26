@@ -89,11 +89,11 @@ const Dashboard = ({
   return (
     <div>
       <div>
-        <h4>Today's Blood group Wise availability</h4>
-      </div>
+        <h4> Today 's Blood group Wise availability</h4>{" "}
+      </div>{" "}
       <div>
-        <Pie data={data} height={400} options={options} />
-      </div>
+        <Pie data={data} height={400} options={options} />{" "}
+      </div>{" "}
     </div>
   );
 };
